@@ -7,7 +7,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <header className="bg-light-main dark:bg-dark-main flex items-center justify-between p-3 w-screen">
+    <header className="bg-light-main dark:bg-dark-main flex items-center justify-between p-3">
       <h1 className="text-light-white dark:text-dark-white font-bold text-lg tracking-wider">
         Where in the world?
       </h1>
