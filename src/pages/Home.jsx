@@ -1,26 +1,28 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { CountryCard } from "../components";
+import { CountryCard, Pagination } from "../components";
 import { getButtons } from "../helpers";
-import { getCountries } from "../store/thunks";
+import { setInitAndEnd, getCountries } from "../store";
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { value, isLoading } = useSelector((state) => state.countries);
-  //console.log(!!value.length , Boolean(value.length))
+  const { value, isLoading, fetched, init, end } = useSelector(
+    (state) => state.countries
+  );
+  const NUMBER_OF_CARDS = 8;
+
   useEffect(() => {
-    !isLoading && dispatch(getCountries());
-  }, []);
+    fetched === false && dispatch(getCountries());
+    dispatch(setInitAndEnd({ init: init, end: end }));
+  }, [init, end]);
 
-  const NUMBER_OF_CARDS = 9;
-
-  //const NUMBER_OF_BUTTONS = getButtons(value.length, NUMBER_OF_CARDS);
+  const toShow = value.slice(init, end);
+  console.log(toShow);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-2 py-3 px-1 bg-light-secondary dark:bg-dark-secondary">
-      {!isLoading &&
-        Boolean(value.length) &&
-        value.map((c) => {
+      {toShow.length > 0 &&
+        toShow.map((c) => {
           return (
             <CountryCard
               key={c.name.common}
@@ -29,9 +31,16 @@ export const Home = () => {
               population={c.population}
               capital={c.capital}
               region={c.region}
+              alt={c.flags.alt}
             />
           );
         })}
+      {value.length > 0 && (
+        <Pagination
+          quantityOfCards={value.length}
+          cardsToShow={NUMBER_OF_CARDS}
+        />
+      )}
     </div>
   );
 };

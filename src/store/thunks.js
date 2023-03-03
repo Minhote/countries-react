@@ -1,6 +1,6 @@
 import { URL_ALL } from "../api/urls";
 import { useFetch } from "../hooks/useFetch";
-import { setAll, startLoading } from "./countriesAllSlice";
+import { setAll, setFetched, startLoading } from "./countriesAllSlice";
 
 export const getCountries = () => {
   return async (dispatch, getState) => {
@@ -13,5 +13,6 @@ export const getCountries = () => {
         isLoading: false,
       })
     );
+    dispatch(setFetched())
   };
 };
