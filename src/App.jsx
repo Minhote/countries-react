@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { Header } from "./components/Header";
-import { Search } from "./pages/Search";
+import { Header, Search } from "./components";
 
 export default function App() {
   const theme = useSelector((state) => state.theme.value);

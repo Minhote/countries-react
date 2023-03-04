@@ -1,15 +1,13 @@
-import { memo, useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setInitAndEnd, setToShow } from "../store";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setInitAndEnd } from "../store";
 
 export const Pagination = ({ quantityOfCards, cardsToShow }) => {
-  const { value, isLoading } = useSelector((state) => state.countries);
   const dispatch = useDispatch();
   const [num, setNum] = useState(1);
   const [cur, setCur] = useState(1);
 
   const limit = Math.ceil(quantityOfCards / cardsToShow);
-  // console.log((cur - 1 * 1) * 8, cur * 8);
   const init = (cur - 1 * 1) * 8;
   const end = cur * 8;
 
@@ -23,18 +21,28 @@ export const Pagination = ({ quantityOfCards, cardsToShow }) => {
     { page: num + 2 },
     { page: num + 3 },
   ];
+  
   function Next() {
-    if (num === limit - 3) return;
-    setNum((num) => num + 1);
+    if (num != limit - 3) {
+      setNum((num) => num + 1);
+    }
+    if (cur != limit) {
+      setCur((cur) => cur + 1);
+    }
   }
   function back() {
-    num > 1 && setNum((num) => num - 1);
+    if (num != 1) {
+      setNum((num) => num - 1);
+    }
+    if (cur != 1) {
+      setCur((cur) => cur - 1);
+    }
   }
   return (
     <div className="flex rounded-lg font-serif mx-auto col-span-full">
       <button
         onClick={back}
-        className="h-12 border-2 border-r-0 border-light-main px-4 rounded-l-lg hover:bg-light-main hover:text-white"
+        className="h-12 border-2 border-r-0 border-light-main dark:border-dark-main px-4 rounded-l-lg hover:bg-light-main dark:hover:bg-dark-main hover:text-light-white dark:hover:text-dark-white"
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path
@@ -48,8 +56,9 @@ export const Pagination = ({ quantityOfCards, cardsToShow }) => {
         <button
           key={pg.page}
           onClick={() => setCur(pg.page)}
-          className={`h-12 border-2 border-r-0 border-light-main w-12 ${
-            cur === pg.page && "bg-light-main text-white"
+          className={`h-12 border-2 border-r-0 border-light-main dark:border-dark-main w-12 ${
+            cur === pg.page &&
+            "bg-light-main text-light-white dark:bg-dark-main dark:text-dark-white"
           }`}
         >
           {pg.page}
@@ -57,7 +66,7 @@ export const Pagination = ({ quantityOfCards, cardsToShow }) => {
       ))}
       <button
         onClick={Next}
-        className="h-12 border-2  border-light-main px-4 rounded-r-lg hover:bg-light-main hover:text-white"
+        className="h-12 border-2 border-light-main dark:border-dark-main px-4 rounded-r-lg hover:bg-light-main dark:hover:bg-dark-main hover:text-light-white dark:hover:text-dark-white"
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
           <path

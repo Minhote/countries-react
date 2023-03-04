@@ -6,9 +6,7 @@ import { setInitAndEnd, getCountries } from "../store";
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const { value, isLoading, fetched, init, end } = useSelector(
-    (state) => state.countries
-  );
+  const { value, fetched, init, end } = useSelector((state) => state.countries);
   const NUMBER_OF_CARDS = 8;
 
   useEffect(() => {
@@ -17,7 +15,6 @@ export const Home = () => {
   }, [init, end]);
 
   const toShow = value.slice(init, end);
-  console.log(toShow);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-2 py-3 px-1 bg-light-secondary dark:bg-dark-secondary">
