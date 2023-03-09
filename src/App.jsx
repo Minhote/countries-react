@@ -10,7 +10,6 @@ export default function App() {
       className={`${theme} grid grid-rows-[repeat(3,min-content)] font-sans `}
     >
       <Header></Header>
-      <Search></Search>
       <Outlet />
     </div>
   );

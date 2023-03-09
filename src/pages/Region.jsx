@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCountries, setInitAndEnd } from "../store";
-import { CountryCard, Pagination } from "../components";
+import { CountryCard, Pagination, Search } from "../components";
 
 export const Region = () => {
   const { region } = useParams();
@@ -31,27 +31,31 @@ export const Region = () => {
 
   const toShow = filteredCountries.slice(init, end);
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-2 py-3 px-1 bg-light-secondary dark:bg-dark-secondary">
-      {toShow.length > 0 &&
-        toShow.map((c) => {
-          return (
-            <CountryCard
-              key={c.name.common}
-              name={c.name.common}
-              url={c.flags.svg}
-              population={c.population}
-              capital={c.capital}
-              region={c.region}
-              alt={c.flags.alt}
-            />
-          );
-        })}
-      {filteredCountries.length > 0 && (
-        <Pagination
-          quantityOfCards={filteredCountries.length}
-          cardsToShow={NUMBER_OF_CARDS}
-        />
-      )}
-    </div>
+    <>
+      <Search />
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-2 py-3 px-1 bg-light-secondary dark:bg-dark-secondary">
+        {toShow.length > 0 &&
+          toShow.map((c) => {
+            return (
+              <CountryCard
+                key={c.name.common}
+                name={c.name.common}
+                url={c.flags.svg}
+                population={c.population}
+                capital={c.capital}
+                region={c.region}
+                alt={c.flags.alt}
+              />
+            );
+          })}
+        {filteredCountries.length > 0 && (
+          <Pagination
+            quantityOfCards={filteredCountries.length}
+            cardsToShow={NUMBER_OF_CARDS}
+            region={region}
+          />
+        )}
+      </div>
+    </>
   );
 };

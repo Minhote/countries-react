@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export const CountryCard = ({
   name,
   url,
@@ -6,14 +8,11 @@ export const CountryCard = ({
   capital,
   alt,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col gap-1 bg-light-main dark:bg-dark-main p-3 rounded-md border-4 border-light-gray dark:border-dark-gray">
-      <figure className="h-52 min-h-[13rem]">
-        <img
-          className="object-cover h-full w-full text-light-white"
-          src={url}
-          alt={alt}
-        />
+      <figure className="h-52 min-h-[13rem] flex items-center justify-center">
+        <img className="h-3/4 w-full text-light-white" src={url} alt={alt} />
       </figure>
       <div className="flex flex-col items-start justify-center gap-2 h-1/2">
         <h2 className="text-bold text-xl text-light-white dark:text-dark-white">
@@ -29,7 +28,16 @@ export const CountryCard = ({
           <strong className="text-lg">Capital:</strong> {capital}
         </p>
       </div>
-      <button className="text-base font-medium text-light-gray dark:text-dark-gray underline hover:text-light-secondary">
+      <button
+        className="text-base font-medium text-light-gray dark:text-dark-gray underline hover:text-light-secondary"
+        onClick={() => {
+          if (name.includes(" ")) {
+            navigate(`/details/${name.replaceAll(" ", "_").toLowerCase()}`);
+          } else {
+            navigate(`/details/${name.toLowerCase()}`);
+          }
+        }}
+      >
         More Details
       </button>
     </div>

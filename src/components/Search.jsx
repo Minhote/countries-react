@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { FaSistrix } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setInitAndEnd } from "../store";
 
 export const Search = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { value, fetched } = useSelector((state) => state.countries);
+  const { fetched } = useSelector((state) => state.countries);
   const [selectValue, setSelectValue] = useState("");
 
   useEffect(() => {

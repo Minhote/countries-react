@@ -1,19 +1,25 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setInitAndEnd } from "../store";
 
-export const Pagination = ({ quantityOfCards, cardsToShow }) => {
+export const Pagination = ({ quantityOfCards, cardsToShow, region }) => {
+  const { init, end } = useSelector((state) => state.countries);
   const dispatch = useDispatch();
   const [num, setNum] = useState(1);
   const [cur, setCur] = useState(1);
 
   const limit = Math.ceil(quantityOfCards / cardsToShow);
-  const init = (cur - 1 * 1) * 8;
-  const end = cur * 8;
+  const initP = (cur - 1 * 1) * 8;
+  const endP = cur * 8;
 
   useEffect(() => {
-    dispatch(setInitAndEnd({ init: init, end: end }));
-  }, [init, end]);
+    dispatch(setInitAndEnd({ init: initP, end: endP }));
+  }, [initP, endP]);
+
+  useEffect(() => {
+    setNum(1);
+    setCur(1);
+  }, [region]);
 
   const pages = [
     { page: num },
@@ -21,7 +27,7 @@ export const Pagination = ({ quantityOfCards, cardsToShow }) => {
     { page: num + 2 },
     { page: num + 3 },
   ];
-  
+
   function Next() {
     if (num != limit - 3) {
       setNum((num) => num + 1);
