@@ -6,10 +6,10 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index element={<Home />}></Route>
-        <Route path=":region" element={<Region />}></Route>
+        <Route index element={<Home />} />
+        <Route path=":region" element={<Region />} />
         <Route path="details">
-          <Route path=":country" element={<Details />}></Route>
+          <Route path=":country" element={<Details />} />
         </Route>
       </Route>
     </Routes>

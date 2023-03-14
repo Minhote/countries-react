@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setInitAndEnd } from "../store";
 
 export const Pagination = ({ quantityOfCards, cardsToShow, region }) => {
-  const { init, end } = useSelector((state) => state.countries);
   const dispatch = useDispatch();
   const [num, setNum] = useState(1);
   const [cur, setCur] = useState(1);
 
+  //Calc quantity of buttons
   const limit = Math.ceil(quantityOfCards / cardsToShow);
   const initP = (cur - 1 * 1) * 8;
   const endP = cur * 8;

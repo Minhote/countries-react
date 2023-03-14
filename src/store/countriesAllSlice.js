@@ -6,6 +6,8 @@ const initialState = {
   init: 0,
   end: 0,
   fetched: false,
+  filtered: [],
+  notFound: false,
 };
 
 const countriesAllSlice = createSlice({
@@ -26,13 +28,23 @@ const countriesAllSlice = createSlice({
       state.init = action.payload.init;
       state.end = action.payload.end;
     },
-    // setToShow: (state, action) => {
-    //   state.toShow = action.payload.toShow;
-    // },
+    setFilteredCountries: (state, action) => {
+      state.filtered = action.payload.filtered;
+    },
+    setNotFound: (state, action) => {
+      state.notFound = action.payload.notFound;
+    },
   },
 });
 
-export const { setAll, startLoading, setToShow, setFetched, setInitAndEnd } =
-  countriesAllSlice.actions;
+export const {
+  setAll,
+  startLoading,
+  setToShow,
+  setFetched,
+  setInitAndEnd,
+  setFilteredCountries,
+  setNotFound,
+} = countriesAllSlice.actions;
 
 export default countriesAllSlice;

@@ -22,7 +22,7 @@ export const Details = () => {
         v.flags.png,
         v.name.common,
         Object.values(v.name.nativeName),
-        v.population,
+        Number(v.population),
         v.region,
         v.subregion ? v.subregion : "none",
         v.capital ? v.capital : "none",
@@ -34,7 +34,6 @@ export const Details = () => {
     })
     .flat();
 
-  console.log(dataToShow);
   useEffect(() => {
     dispatch(getSingleCountry(country.replaceAll("_", " ")));
     return () => {
@@ -79,7 +78,7 @@ export const Details = () => {
                 </p>
                 <p className="text-sm">
                   <strong className="font-bold text-base">Population:</strong>{" "}
-                  {dataToShow[3]}
+                  {dataToShow[3].toLocaleString("en-US")}
                 </p>
                 <p className="text-sm">
                   <strong className="font-bold text-base">Region:</strong>{" "}
@@ -104,9 +103,8 @@ export const Details = () => {
                 <p className="text-sm">
                   <strong className="font-bold text-base">Currencies:</strong>{" "}
                   {Array.isArray(dataToShow[8])
-                    ? dataToShow[8].map((v) => v.name)
+                    ? dataToShow[8].map((v) => `${v.name}, `)
                     : dataToShow[8]}
-                  {","}
                 </p>
                 <p className="text-sm">
                   <strong className="font-bold text-base">Languages:</strong>{" "}
@@ -117,7 +115,7 @@ export const Details = () => {
             <div className="flex gap-1 flex-wrap items-center">
               <strong className="font-bold text-base">Border Countries:</strong>{" "}
               {borders.length > 0
-                ? borders.map((c) => <Border text={c} />)
+                ? borders.map((c) => <Border key={c} text={c} />)
                 : "none"}
             </div>
           </div>

@@ -19,13 +19,19 @@ export const CountryCard = ({
           {name}
         </h2>
         <p className="text-bold text-sm text-light-white dark:text-dark-white">
-          <strong className="text-lg">Population:</strong> {population}
+          <strong className="text-lg">Population:</strong>
+          {"  "}
+          {Number(population).toLocaleString("en-US")}
         </p>
         <p className="text-bold text-sm text-light-white dark:text-dark-white">
-          <strong className="text-lg">Region:</strong> {region}
+          <strong className="text-lg">Region:</strong>
+          {"  "}
+          {region}
         </p>
         <p className="text-bold text-sm text-light-white dark:text-dark-white">
-          <strong className="text-lg">Capital:</strong> {capital}
+          <strong className="text-lg">Capital:</strong>
+          {"  "}
+          {capital}
         </p>
       </div>
       <button

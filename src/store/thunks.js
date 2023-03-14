@@ -1,5 +1,5 @@
 import { URL_ALL, URL_CODE, URL_SINGLE } from "../api/urls";
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "../api/useFetch";
 import { setAll, setFetched, startLoading } from "./countriesAllSlice";
 import { setBorders, setCountry } from "./singleCountrySlice";
 
