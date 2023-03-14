@@ -109,6 +109,10 @@ export const Details = () => {
                 <p className="text-base">
                   <strong className="font-bold text-lg">Languages:</strong>{" "}
                   {dataToShow[9].map((v) => `${v}, `)}
+<<<<<<< HEAD
+=======
+                  {dataToShow[9].map((v) => v)}
+>>>>>>> 32d3c0fbb5c7e7c2bd836bb5ee032d5ed7a7cc7d
                 </p>
               </div>
             </div>
