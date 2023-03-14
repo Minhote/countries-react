@@ -8,11 +8,11 @@ export const Header = () => {
 
   return (
     <header className="bg-light-main dark:bg-dark-main flex items-center justify-between p-3 h-[10vh]">
-      <h1 className="text-light-white dark:text-dark-white font-bold text-lg tracking-wider">
+      <h1 className="text-dark-main dark:text-dark-white font-bold text-lg tracking-wider">
         Where in the world?
       </h1>
       <button
-        className="text-light-white dark:text-dark-white font-medium text-base tracking-wide flex gap-2 items-center"
+        className="text-dark-main dark:text-dark-white font-medium text-base tracking-wide flex gap-2 items-center"
         onClick={() => dispatch(changeTheme())}
       >
         {theme === "light" ? <FaRegMoon /> : <FaRegSun />}
